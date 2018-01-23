@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!D<!DOCTYPE html>
 <html>
   <head>
     <title>Listening to Nodes</title>
@@ -7,6 +7,8 @@
        border: 1px solid red;
        padding: 6px;
        min-height: 12px;
+       background-color: #ffffff;
+       opacity: 1;
      }
     </style>
   </head>
@@ -37,5 +39,31 @@
         </div>
       </div>
     </div>
+    <script>
+var divs = document.querySelectorAll('div')
+var divSet = []
+
+for(let i = 0; i < divs.length; i++){
+  divSet.push(divs[i].innerHTML)
+}
+for(i = 0; i < divSet.length; i++){
+  divSet[i] = divSet[i].replace(/ /g, "")
+}
+
+
+function rollCall(){
+  var trimmed = this.firstChild.nodeValue.trim(); 
+  this.firstChild.nodeValue = trimmed.slice(0,1) + ` reporting for duty!` + trimmed.slice(1,-0);
+}
+function trickleDown(){ 
+  this.parentElement.style.backgroundColor = "#000000"
+  this.parentElement.style.color = "#ffaaaa"
+}
+for (let i = 0; i < divs.length; i++) {
+  divs[i].addEventListener('click', rollCall)
+  divs[i].addEventListener('click', trickleDown, true)
+}  
+
+    </script>
   </body>
 </html>
